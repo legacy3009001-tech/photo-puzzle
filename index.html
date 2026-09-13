@@ -15,7 +15,7 @@
 </head>
 <body>
 <main class="app">
-<header><h1>📷 Photo Puzzle</h1><span id="status"></span></header>
+<header><h1>📷 Photo Puzzle</h1></header>
 
 <section id="home" class="screen active">
 <div class="hero">好きな写真を選んで<br><b>オリジナルパズル</b>にしよう！</div>
@@ -27,7 +27,7 @@
 <button data-size="5">5 × 5<small>むずかしい</small></button>
 <button data-size="6">6 × 6<small>超むずかしい</small></button>
 </div></div>
-<p class="note">写真はこの端末の中でパズルに変換します。写真そのものをサーバーへ送信しません。</p>
+<p class="note">遊び方：動かしたいピースをタップ → 移動先のマスをタップ。<br>移動先のピースは空いているマスへ移動します。</p>
 </section>
 
 <section id="game" class="screen">
@@ -37,6 +37,7 @@
 <div>手数 <span id="moves">0</span></div>
 <button id="hint">💡 ヒント</button>
 </div>
+<div id="instruction" class="instruction">動かしたいピースをタップしてください</div>
 <div id="loading" class="loading">写真をパズルに変換しています…</div>
 <div id="board" class="board" aria-label="パズル"></div>
 <div class="gameActions"><button id="shuffleAgain">🔀 やり直す</button><button id="quit">🏠 メニュー</button></div>
