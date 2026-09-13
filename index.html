@@ -8,46 +8,39 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Photo Puzzle">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon.svg">
 <link rel="stylesheet" href="style.css">
 <title>Photo Puzzle</title>
 </head>
 <body>
 <main class="app">
 <header><h1>📷 Photo Puzzle</h1></header>
-
 <section id="home" class="screen active">
 <div class="hero">好きな写真を選んで<br><b>オリジナルパズル</b>にしよう！</div>
 <label class="photoBtn">📷 写真を選ぶ<input id="photoInput" type="file" accept="image/*" hidden></label>
-<div class="card"><h2>難易度</h2>
-<div class="difficulty">
+<div class="card"><h2>難易度</h2><div class="difficulty">
 <button data-size="3">3 × 3<small>かんたん</small></button>
 <button data-size="4" class="selected">4 × 4<small>ふつう</small></button>
 <button data-size="5">5 × 5<small>むずかしい</small></button>
 <button data-size="6">6 × 6<small>超むずかしい</small></button>
 </div></div>
-<p class="note">遊び方：動かしたいピースをタップ → 移動先のマスをタップ。<br>移動先のピースは空いているマスへ移動します。</p>
+<p class="note">動かしたいピースをタップ → 移動先をタップ。<br>移動先のピースは空いているマスへ移動します。</p>
 </section>
-
 <section id="game" class="screen">
-<div class="gamebar">
-<button id="changePhoto">写真変更</button>
-<div>⏱ <span id="timer">00:00</span></div>
-<div>手数 <span id="moves">0</span></div>
-<button id="hint">💡 ヒント</button>
-</div>
+<div class="gamebar"><button id="changePhoto">写真変更</button><div>⏱ <span id="timer">00:00</span></div><div>手数 <span id="moves">0</span></div><button id="hint">💡 ヒント</button></div>
 <div id="instruction" class="instruction">動かしたいピースをタップしてください</div>
 <div id="loading" class="loading">写真をパズルに変換しています…</div>
-<div id="board" class="board" aria-label="パズル"></div>
+<div id="board" class="board"></div>
 <div class="gameActions"><button id="shuffleAgain">🔀 やり直す</button><button id="quit">🏠 メニュー</button></div>
 <div id="hintOverlay" class="overlay hidden"><div class="hintCard"><h2>完成イメージ</h2><img id="hintImage" alt="完成イメージ"><button id="closeHint">閉じる</button></div></div>
 </section>
-
 <section id="result" class="screen">
-<div class="resultCard"><div class="trophy">🎉</div><h2>完成！</h2><p id="resultText"></p><p id="bestText"></p><button id="again" class="primary">もう一度遊ぶ</button><button id="newPhoto">別の写真で遊ぶ</button></div>
+<div class="resultCard"><div class="trophy">🎉</div><h2>完成！</h2><p id="resultText"></p><p id="bestText"></p>
+<button id="again" class="primary" type="button">もう一度遊ぶ</button>
+<button id="newPhoto" type="button">別の写真で遊ぶ</button>
+</div>
 </section>
 </main>
-<script src="app.js"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
