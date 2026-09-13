@@ -70,11 +70,55 @@ function render(){
 }
 function updateInstruction(){$("#instruction").textContent=selectedIndex===null?"動かしたいピースをタップしてください":"移動先のマスをタップしてください"}
 function isSolved(){return boardState.every((p,i)=>p===i)}
+
+function playCelebrationSound(){
+  // Web Audio only: no sound file is needed, so it also works offline.
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    const ctx=new AC();
+    const notes=[523.25,659.25,783.99,1046.5];
+    notes.forEach((freq,i)=>{
+      const osc=ctx.createOscillator(), gain=ctx.createGain();
+      osc.type="sine"; osc.frequency.value=freq;
+      gain.gain.setValueAtTime(0.0001,ctx.currentTime+i*.11);
+      gain.gain.exponentialRampToValueAtTime(.12,ctx.currentTime+i*.11+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+i*.11+.22);
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.start(ctx.currentTime+i*.11);osc.stop(ctx.currentTime+i*.11+.24);
+    });
+    setTimeout(()=>ctx.close(),800);
+  }catch(e){console.log("celebration sound unavailable",e)}
+}
+function launchConfetti(){
+  const box=$("#confetti");
+  if(!box)return;
+  box.innerHTML="";
+  const count=90;
+  for(let i=0;i<count;i++){
+    const p=document.createElement("span");
+    p.className="confettiPiece";
+    p.style.left=(Math.random()*100)+"%";
+    p.style.setProperty("--drift",((Math.random()-.5)*180)+"px");
+    p.style.animationDuration=(2.2+Math.random()*1.8)+"s";
+    p.style.animationDelay=(Math.random()*.35)+"s";
+    p.style.transform=`rotate(${Math.random()*180}deg)`;
+    p.style.width=(7+Math.random()*7)+"px";
+    p.style.height=(10+Math.random()*13)+"px";
+    // Let the browser choose the color so the CSS remains simple.
+    p.style.background=`hsl(${Math.floor(Math.random()*360)} 85% 55%)`;
+    box.appendChild(p);
+  }
+  setTimeout(()=>box.innerHTML="",4500);
+}
+
 function finish(){
   stopTimer();ready=false;
   const key="best-"+size,best=Number(localStorage.getItem(key))||0;
   if(!best||seconds<best)localStorage.setItem(key,String(seconds));
   $("#resultText").textContent=`タイム ${fmt(seconds)}　・　${moves}手`;
+  launchConfetti();
+  playCelebrationSound();
   $("#bestText").textContent=`ベストタイム：${fmt(Number(localStorage.getItem(key))||seconds)}`;
   show("result");
 }
